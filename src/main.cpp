@@ -2,10 +2,11 @@
 #include <vector>
 #include <cstdlib> // For srand and time
 #include <ctime>   // For time
+#include "grid.hpp"
 
 int main() 
 {
-    const Color darkGreen = {20, 160, 133, 255};
+    const Color darkGreen = {252, 208, 161};
     
     constexpr int screenWidth = 800;
     constexpr int screenHeight = 600;
@@ -14,13 +15,13 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "Game of Life");
     SetTargetFPS(60);
-    
+    Grid grid(screenWidth, screenHeight, 10);
     while (!WindowShouldClose())
     {
    
         BeginDrawing();
             ClearBackground(darkGreen);
-        
+            grid.draw();
         EndDrawing();
     }
     
