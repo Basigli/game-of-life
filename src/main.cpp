@@ -6,7 +6,7 @@
 
 int main() 
 {
-    const Color darkGreen = {252, 208, 161};
+    const Color backgroundColor = {252, 208, 161};
     
     constexpr int screenWidth = 800;
     constexpr int screenHeight = 600;
@@ -15,12 +15,13 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "Game of Life");
     SetTargetFPS(60);
-    Grid grid(screenWidth, screenHeight, 10);
+    Grid grid(screenWidth, screenHeight, 20);
+
+
     while (!WindowShouldClose())
-    {
-   
+    {   
         BeginDrawing();
-            ClearBackground(darkGreen);
+            ClearBackground(backgroundColor);
             grid.draw();
         EndDrawing();
     }
