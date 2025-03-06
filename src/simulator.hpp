@@ -10,11 +10,10 @@ public:
     void draw();
     std::vector<int> getNeighbours(int x, int y);
     int countAliveNeighbours(int x, int y);
+    void updateStatus();
+    bool needsUpdate(int x, int y);
 
     
 private:
-    int screenWidth;
-    int screenHeight;
-    int cellSize;
     Grid grid;
 };

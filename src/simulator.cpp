@@ -1,6 +1,6 @@
 #include "simulator.hpp"
 
-Simulator::Simulator(int screenWidth, int screenHeight, int cellSize): screenWidth(screenWidth), screenHeight(screenHeight), cellSize(cellSize), grid(screenWidth, screenHeight, cellSize)
+Simulator::Simulator(int screenWidth, int screenHeight, int cellSize): grid(screenWidth, screenHeight, cellSize)
 {
 }
 
@@ -47,4 +47,46 @@ int Simulator::countAliveNeighbours(int x, int y)
         aliveNeighbours += neighbour;
     }
     return aliveNeighbours;
+}
+
+void Simulator::updateStatus()
+{
+    std::vector<std::vector<int>> cellsToUpdate;
+    for (int x = 0; x <= grid.getCols(); x++)
+    {
+        for (int y = 0; y <= grid.getRows(); y++)
+        {
+            if (needsUpdate(x, y)) {
+                cellsToUpdate.push_back({x, y});
+            }
+        }
+    }
+    for (auto cell : cellsToUpdate)
+    {
+        grid.setCell(cell[0], cell[1], !grid.getCellValue(cell[0], cell[1]));
+    }
+    
+}
+
+bool Simulator::needsUpdate(int x, int y)
+{
+    int aliveNeighbours = countAliveNeighbours(x, y);
+    int cellValue = grid.getCellValue(x, y);
+    if (cellValue == 1)
+    {
+        if (aliveNeighbours < 2 || aliveNeighbours > 3)
+        {
+            //grid.setCell(x, y, 0);
+            return true;
+        }
+        
+    } else 
+    {
+        if (aliveNeighbours == 3)
+        {
+            //grid.setCell(x, y, 1);
+            return true;
+        }
+    }
+    return false;
 }
