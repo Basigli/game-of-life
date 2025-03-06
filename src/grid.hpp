@@ -8,6 +8,8 @@ public:
     void draw();
     void setCell(int x, int y, int value);
     int getCellValue(int x, int y);
+    int getRows();
+    int getCols();
 
 private:
     int width;

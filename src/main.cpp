@@ -2,7 +2,7 @@
 #include <vector>
 #include <cstdlib> // For srand and time
 #include <ctime>   // For time
-#include "grid.hpp"
+#include "simulator.hpp"
 
 int main() 
 {
@@ -15,14 +15,15 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "Game of Life");
     SetTargetFPS(60);
-    Grid grid(screenWidth, screenHeight, 20);
+    Simulator simulator(screenWidth, screenHeight, 20);
+  
 
 
     while (!WindowShouldClose())
     {   
         BeginDrawing();
             ClearBackground(backgroundColor);
-            grid.draw();
+            simulator.draw();
         EndDrawing();
     }
     

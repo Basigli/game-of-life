@@ -37,3 +37,13 @@ int Grid::getCellValue(int x, int y)
     }
     return 0;
 }
+
+int Grid::getRows()
+{
+    return height/cellSize;
+}
+
+int Grid::getCols()
+{
+    return width/cellSize;
+}
