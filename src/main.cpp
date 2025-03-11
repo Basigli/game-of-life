@@ -4,6 +4,9 @@
 #include <ctime>   // For time
 #include "simulator.hpp"
 
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
+
 int main() 
 {
     const Color backgroundColor = {252, 208, 161};
@@ -12,7 +15,7 @@ int main()
     constexpr int screenHeight = 600;
     constexpr int cellSize = 20;
 
-
+    bool isRunning = false;
     InitWindow(screenWidth, screenHeight, "Game of Life");
     SetTargetFPS(20);
     Simulator simulator(screenWidth, screenHeight, cellSize);
@@ -42,10 +45,18 @@ int main()
 
     while (!WindowShouldClose())
     {   
-        simulator.updateStatus();
+        if (GuiButton((Rectangle){10, 10, 100, 20}, isRunning ? "Stop" : "Start"))  
+        {
+            isRunning = !isRunning;
+        }
+        if (isRunning) {
+            simulator.updateStatus();
+        }
+      
         BeginDrawing();
             ClearBackground(backgroundColor);
             simulator.draw();
+            GuiButton((Rectangle){10, 10, 100, 20}, isRunning ? "Stop" : "Start");
         EndDrawing();
     }
     
